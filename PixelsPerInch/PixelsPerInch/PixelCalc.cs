@@ -8,7 +8,7 @@ namespace PixelsPerInch
 {
     public static class PixelCalc
     {
-        public static void Calculate(int width, int height, double diagonalSize)
+        public static ResultObj Calculate(int width, int height, double diagonalSize)
         {
             double diagonalInPixels, ppi, dotPitch;
             
@@ -18,10 +18,32 @@ namespace PixelsPerInch
 
             dotPitch = Math.Round(25.4 / (Math.Sqrt((width * width) + (height * height)) / diagonalSize), 4);
 
-            Console.WriteLine($"PPI = {ppi}");
-            Console.WriteLine($"Diagonal = {diagonalInPixels} pixels");
-            Console.WriteLine($"Dot Pitch = {dotPitch} mm");
+            return new ResultObj
+            {
+                Ppi = ppi,
+                Diagonal = diagonalInPixels,
+                DotPitch = dotPitch
+            };
 
+        }
+    }
+
+
+    public class ResultObj : IEquatable<ResultObj>
+    {
+
+        public double Ppi { get; set; }
+        public double Diagonal { get; set; }
+        public double DotPitch { get; set; }
+
+        public bool Equals(ResultObj other)
+        {
+            if (other is null)
+            {
+                return false;
+            }
+
+            return (Ppi == other.Ppi && Diagonal == other.Diagonal && DotPitch == other.DotPitch);
         }
     }
 }

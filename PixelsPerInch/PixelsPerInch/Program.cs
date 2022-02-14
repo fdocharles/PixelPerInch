@@ -109,7 +109,16 @@ namespace PixelsPerInch
                     Console.WriteLine();
                     Console.WriteLine("-- Results --");
                     Console.WriteLine();
-                    PixelCalc.Calculate(width, height, diagonal);
+
+                    var result = PixelCalc.Calculate(width, height, diagonal);
+
+                    Console.WriteLine($"PPI = {result.Ppi}");
+                    Console.WriteLine($"Diagonal = {result.Diagonal} pixels");
+                    Console.WriteLine($"Dot Pitch = {result.DotPitch} mm");
+
+
+
+
                     Console.WriteLine();
                     Console.WriteLine();
                 }
